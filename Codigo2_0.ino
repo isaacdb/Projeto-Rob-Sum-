@@ -35,7 +35,7 @@ int R;
 
 int Acao;
 
-void leitura(void);
+void Leitura(void);
 
 void ConfigTimer(void) {
   Timer1.initialize(10000);
@@ -77,11 +77,48 @@ void setup() {
 
 }
 void loop() {
-  leitura();
+  Leitura();
+  Condicao();
+  Action();
+  Motores();
 
+}
+
+void Motores() {
+  digitalWrite(MdirF, DirecaoDir);
+  digitalWrite(MdirT, digitalRead(MdirF) ^ 1);
+
+  digitalWrite(MesqF, DirecaoEsq);
+  digitalWrite(MesqT, digitalRead(MesqF) ^ 1);
+}
+
+void Leitura(void) {
+  Linha[0] = analogRead(Slin1);
+  Linha[1] = analogRead(Slin2);
+  Linha[2] = analogRead(Slin3);
+  Linha[3] = analogRead(Slin4);
+  int i;
+  for (i = 0; i < 4; i++) {
+    if (Linha[i] > 400) {
+      Linha[i] = 0;
+    }
+    else {
+      Linha[i] = 1;
+    }
+  }
+
+  Visao[0] = digitalRead(SobsF);
+  Visao[1] = digitalRead(SobsD);
+  Visao[2] = digitalRead(SobsT);
+  Visao[3] = digitalRead(SobsE);
+
+
+}
+
+void Condicao() {
   if ( Linha[0] == 0 &&  Linha[1] == 0 &&  Linha[2] == 0 &&  Linha[3] == 0) {
 
-    if (Visao[0] == 0 && R==0) {
+    if (Visao[0] == 0 && R == 0) {
       Acao = 1; // frente
     }
     else if (Visao[1] == 0) {
@@ -106,7 +143,7 @@ void loop() {
       T = 0;
     }
     else {
-      Acao=Acao;
+      Acao = Acao;
     }
   }
   else {
@@ -127,8 +164,13 @@ void loop() {
       T = 0;
     }
     else {
-    Acao=Acao;}
+      Acao = Acao;
+    }
   }
+}
+
+void Action() {
+
   switch (Acao) {
     case 1 :
       DirecaoEsq = 1;
@@ -138,15 +180,15 @@ void loop() {
       if (T <= tre) {
         DirecaoEsq = 0;
         DirecaoDir = 0;
-        R=1;
+        R = 1;
       }
       else if (T <= tgiro) {
         DirecaoEsq = 0;
         DirecaoDir = 1;
-        R=0;
+        R = 0;
       }
       else {
-    
+
         Acao = 1;
       }
       break;
@@ -154,15 +196,15 @@ void loop() {
       if (T <= tre) {
         DirecaoEsq = 0;
         DirecaoDir = 0;
-        R=1;
+        R = 1;
       }
       else if (T <= tgiro) {
         DirecaoEsq = 1;
         DirecaoDir = 0;
-        R=0;
+        R = 0;
       }
       else {
-     
+
         Acao = 1;
       }
       break;
@@ -209,34 +251,4 @@ void loop() {
       break;
 
   }
-
-  digitalWrite(MdirF, DirecaoDir);
-  digitalWrite(MdirT, digitalRead(MdirF) ^ 1);
-
-  digitalWrite(MesqF, DirecaoEsq);
-  digitalWrite(MesqT, digitalRead(MesqF) ^ 1);
-
-
-}
-void leitura(void) {
-  Linha[0] = analogRead(Slin1);
-  Linha[1] = analogRead(Slin2);
-  Linha[2] = analogRead(Slin3);
-  Linha[3] = analogRead(Slin4);
-  int i;
-  for (i = 0; i < 4; i++) {
-    if (Linha[i] > 400) {
-      Linha[i] = 0;
-    }
-    else {
-      Linha[i] = 1;
-    }
-  }
-
-  Visao[0] = digitalRead(SobsF);
-  Visao[1] = digitalRead(SobsD);
-  Visao[2] = digitalRead(SobsT);
-  Visao[3] = digitalRead(SobsE);
-
-
 }
