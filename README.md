@@ -20,7 +20,6 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 - [IDE Arduino]
 - [C++]
-- [PHP]
 
 ### Autor do código
 Isaac Debiasi
