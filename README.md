@@ -5,8 +5,7 @@
 ## 💻 Sobre o projeto
 <p>Nosso robô participou 3 vezes da competição, tendo levado o troféu em uma dessas edições. Durante esse tempo o código foi atualizado algumas vezes, é interessante ver a evolução da versão inicial para a final, a quantidade de linhas foi reduzida pela metade, deixando o codigo mais limpo e fácil de dar manutenção.</p>
 
-<p>Video do robo em ação!</p>
-<p>https://youtu.be/vpHOmk1S99U</p>
+<p>Video do robo em ação \! https://youtu.be/vpHOmk1S99U</p>
 
 ---
 
